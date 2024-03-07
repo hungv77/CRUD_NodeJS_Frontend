@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           <Route path="/login" exact>
             <Login/>
           </Route>
+          <Router path="/register">
+            <Register/>
+          </Router>
           <Route path="*">
             404 not found
           </Route>
