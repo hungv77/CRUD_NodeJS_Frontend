@@ -18,12 +18,12 @@ function App() {
           <Route path="/" exact>
             Home
           </Route>
-          <Route path="/login" exact>
-            <Login />
+          <Route exact path="/login">
+            <Login/>
           </Route>
-          <Router path="/register">
-            <Register />
-          </Router>
+          <Route exact path="/register">
+            <Register/>
+          </Route>
           <Route path="*">404 not found</Route>
         </Switch>
       </div>
