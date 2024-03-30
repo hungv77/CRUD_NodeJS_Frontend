@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Users.scss";
 import { fetchAllUser, deleteUser } from "../../services/userService";
@@ -76,7 +76,7 @@ const Users = (props) => {
 
   const handleRefresh = async () => {
     await fetchUsers();
-  }
+  };
 
   return (
     <>
@@ -87,8 +87,9 @@ const Users = (props) => {
               <h3>Manage Users</h3>
             </div>
             <div className="actions my-3">
-              <button className="btn btn-success refresh"
-                onClick = {() => handleRefresh()}
+              <button
+                className="btn btn-success refresh"
+                onClick={() => handleRefresh()}
               >
                 <i className="fa fa-refresh"></i>Refresh
               </button>
