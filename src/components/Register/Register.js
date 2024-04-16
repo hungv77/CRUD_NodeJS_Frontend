@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Register.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { registerNewUser } from "../../services/userService";
+import { UserContext } from "../../context/UserContext";
 
 const Register = (props) => {
+  const { user } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [username, setUsername] = useState("");
@@ -25,9 +28,9 @@ const Register = (props) => {
   };
 
   useEffect(() => {
-    // axios.get("http://localhost:8080/api/v1/test-api").then(data=>{
-    //   console.log(">>> check data axios: ", data)
-    // })
+    if (user && user.isAuthenticated) {
+      history.push("/");
+    }
   }, []);
 
   const isValidInputs = () => {
@@ -72,15 +75,15 @@ const Register = (props) => {
     return true;
   };
 
-  const handleRegister = async() => {
+  const handleRegister = async () => {
     let check = isValidInputs();
     if (check === true) {
       let serverData = await registerNewUser(email, phone, username, password);
-      if(+serverData.EC === 0){
-        toast.success(serverData.EM)
+      if (+serverData.EC === 0) {
+        toast.success(serverData.EM);
         history.push("/login");
-      }else {
-        toast.error(serverData.EM)
+      } else {
+        toast.error(serverData.EM);
       }
     }
   };
@@ -90,7 +93,9 @@ const Register = (props) => {
       <div className="container">
         <div className="row px-3 px-sm-0">
           <div className="content-left col-12 d-none col-sm-7 d-sm-block">
-            <div className="brand">Title</div>
+          <div className="brand">
+              <Link to="/"><span title="Return to HomePage">Title</span></Link>
+            </div>
             <div className="detail">
               Daring I'm your masterpiece a work of art. Hi my name is Fabulous
               your favorite star.
@@ -181,6 +186,12 @@ const Register = (props) => {
               >
                 Already've an account. Login Here.
               </button>
+              <div className="mt-3 return">
+                <Link to="/">
+                  <i className="fa fa-arrow-circle-left"></i>
+                  <span title="Return to HomePage">Return to HomePage</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

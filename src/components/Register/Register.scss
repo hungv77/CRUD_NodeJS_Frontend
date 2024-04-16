@@ -23,6 +23,10 @@
       color: #1877f2;
       text-transform: uppercase;
       font-weight: 600;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     .detail{
@@ -51,6 +55,16 @@
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .return {
+    a {
+      text-decoration: none;
+    }
+
+    span {
+      padding-left: 7px;
     }
   }
 }
